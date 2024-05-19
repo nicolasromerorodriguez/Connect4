@@ -10,19 +10,23 @@ import javax.swing.ImageIcon;
  *
  * @author nicol
  */
-public class TipoFicha implements ITipoFicha{
-    private String nombre;
-  private ImageIcon textura;
-  
-  public TipoFicha(String nombre, ImageIcon textura){
-      this.nombre = nombre;
-      this.textura = textura;
-  }
-  
-  
+public class TipoFicha {
 
-    @Override
+    private String nombre;
+    private ImageIcon textura;
+
+    public TipoFicha(String nombre, ImageIcon textura) {
+        this.nombre = nombre;
+        this.textura = textura;
+    }
+
     public String getNombre() {
         return this.nombre;
     }
+
+    public void setTextura(ImageIcon textura) {
+        this.textura = textura;
+    }
+    
+    
 }

@@ -5,22 +5,21 @@
 package TiposFicha;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author nicol
  */
 public class FabricaTipos {
-    private ArrayList<TipoFicha> tipoFichas = new ArrayList<>();
+    private static ArrayList<TipoFicha>  tipoFichas = new ArrayList<>();
     
-    public FabricaTipos(){
-        this.tipoFichas = new ArrayList<>();
-    }
-    
-    public ITipoFicha getTipoFicha(TipoFicha tipoFicha ){
-        if(!tipoFichas.contains(tipoFicha)){
-            tipoFichas.add(tipoFicha);
+    public static TipoFicha getTipoFicha(String nombre, ImageIcon icon){
+        for (TipoFicha t : tipoFichas){
+            if( t.getNombre().equals(nombre) ){
+                return t;
+            }
         }
-        return tipoFicha ;
+        return new TipoFicha(nombre, icon) ;
     }
 }

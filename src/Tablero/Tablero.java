@@ -4,6 +4,8 @@
  */
 package Tablero;
 
+import Fichas.Ficha;
+
 /**
  *
  * @author nicol
@@ -11,13 +13,12 @@ package Tablero;
 public class Tablero {
     private static final int FILAS = 6;
     private static final int COLUMNAS = 7;
-    private char[][] tablero;
+    private Ficha[][] tablero;
     private static Tablero instance;
 
     // Private constructor to prevent instantiation
     private Tablero() {
-        tablero = new char[FILAS][COLUMNAS];
-        inicializarTablero();
+        tablero = new Ficha[FILAS][COLUMNAS];
     }
 
     // Public method to provide access to the instance si
@@ -28,37 +29,14 @@ public class Tablero {
         return instance;
     }
 
-    // Method to initialize the board
-    private void inicializarTablero() {
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                tablero[i][j] = ' ';
-            }
-        }
-    }
-
     // Getter for the board
-    public char[][] getTablero() {
+    public Ficha[][] getTablero() {
         return tablero;
     }
 
-    // Method to reset the board
-   /* public void reiniciar() {
-        inicializarTablero();
-    }*/
+    public void limpiar() {
+        tablero = new Ficha[FILAS][COLUMNAS];
+    }
 
-    // Method to display the board (optional for console debugging)
-    /*public void displayBoard() {
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                System.out.print("|" + tablero[i][j]);
-            }
-            System.out.println("|");
-        }
-        for (int j = 0; j < COLUMNAS; j++) {
-            System.out.print(" " + j);
-        }
-        System.out.println();
-    }*/
 }
 

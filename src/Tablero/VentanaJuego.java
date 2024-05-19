@@ -21,14 +21,11 @@ public class VentanaJuego extends JFrame {
     private static final int FILAS = 6;
     private static final int COLUMNAS = 7;
     private JButton[][] botones;
-    private char[][] tablero;
     private char jugadorActual; //Probablemente inutil rn
     
     
     
     public VentanaJuego(){
-         Tablero singletonBoard = Tablero.getInstance();
-        tablero = singletonBoard.getTablero();
         botones = new JButton[FILAS][COLUMNAS];
         jugadorActual = 'X';  // Starting player
 
