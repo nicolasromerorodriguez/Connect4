@@ -20,7 +20,7 @@ public class Tablero {
         inicializarTablero();
     }
 
-    // Public method to provide access to the instance
+    // Public method to provide access to the instance si
     public static Tablero getInstance() {
         if (instance == null) {
             instance = new Tablero();
