@@ -15,7 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class VentanaJuego extends JFrame {
+import Observador.*;
+public class VentanaJuego extends JFrame implements IObservador {
     
     
     private static final int FILAS = 6;
@@ -28,6 +29,10 @@ public class VentanaJuego extends JFrame {
     public VentanaJuego(){
         botones = new JButton[FILAS][COLUMNAS];
         jugadorActual = 'X';  // Starting player
+        
+        
+        
+        singletonBoard.agregar(this);
 
         CrearUI();
     }
@@ -67,6 +72,59 @@ public class VentanaJuego extends JFrame {
         }
 
         setVisible(true);
+    }
+     
+     
+     public boolean RevisaGanador(char jugador) {
+        // Same win-checking logic as before
+        // Check horizontal, vertical, and diagonal wins
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS - 3; j++) {
+                if (tablero[i][j] == jugador && tablero[i][j + 1] == jugador && tablero[i][j + 2] == jugador && tablero[i][j + 3] == jugador) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < FILAS - 3; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                if (tablero[i][j] == jugador && tablero[i + 1][j] == jugador && tablero[i + 2][j] == jugador && tablero[i + 3][j] == jugador) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 3; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS - 3; j++) {
+                if (tablero[i][j] == jugador && tablero[i - 1][j + 1] == jugador && tablero[i - 2][j + 2] == jugador && tablero[i - 3][j + 3] == jugador) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < FILAS - 3; i++) {
+            for (int j = 0; j < COLUMNAS - 3; j++) {
+                if (tablero[i][j] == jugador && tablero[i + 1][j + 1] == jugador && tablero[i + 2][j + 2] == jugador && tablero[i + 3][j + 3] == jugador) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+     
+     //Metodos del Observador
+    @Override
+    public void actualizar() {
+        
+        //Realmente no se que hace el bloque de abajo
+        
+       /* for (int i =0; i< FILAS; i++){
+            for(int j=0; j< COLUMNAS; j++){
+                botones[i][j].setText(String.valueOf(tablero[i][j]));
+            }
+        }*/ 
+       
+       //Idea mia de que podría ir acá
+       
+       
     }
     
     
