@@ -4,19 +4,28 @@
  */
 package Tablero;
 
+import Observador.*;
+import java.util.List;
+
 /**
  *
  * @author nicol
  */
-public class Tablero {
+public class Tablero implements IObservado {
     private static final int FILAS = 6;
     private static final int COLUMNAS = 7;
     private char[][] tablero;
     private static Tablero instance;
+    private List<IObservador> observadores; //Declaracion de la lista de observadores
+    public char jugadorActual;
+    
+    //Cada metodo que altere el tablero debe llamar a notificar()
 
     // Private constructor to prevent instantiation
     private Tablero() {
         tablero = new char[FILAS][COLUMNAS];
+        
+        
         inicializarTablero();
     }
 
@@ -60,5 +69,24 @@ public class Tablero {
         }
         System.out.println();
     }*/
+
+    
+    //Metodos del observado
+    @Override
+    public void agregar(IObservador observador) {
+        observadores.add(observador);
+    }
+
+    @Override
+    public void eliminar(IObservador observador) {
+        observadores.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores() {
+        for(IObservador observador : observadores){
+            observador.actualizar();
+        }
+    }
 }
 
