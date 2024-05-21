@@ -8,124 +8,94 @@ package Tablero;
  *
  * @author nicol
  */
-
-
-
+import Fichas.Ficha;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Observador.*;
+import java.util.ArrayList;
+
 public class VentanaJuego extends JFrame implements IObservador {
-    
-    
+
     private static final int FILAS = 6;
     private static final int COLUMNAS = 7;
-    private JButton[][] botones;
-    private char jugadorActual; //Probablemente inutil rn
-    
-    
-    
-    public VentanaJuego(){
-        botones = new JButton[FILAS][COLUMNAS];
-        jugadorActual = 'X';  // Starting player
-        
-        
-        
-        singletonBoard.agregar(this);
+    public JButton[] botonesColumna;
+    public JLabel[][] labImagenes;
+    private JPanel panelUI;
+    private GestorAcciones acciones;
+
+    public VentanaJuego(GestorAcciones acciones) {
+        botonesColumna = new JButton[COLUMNAS];
+        labImagenes = new JLabel[FILAS][COLUMNAS];
+        panelUI = new JPanel(new GridLayout(FILAS + 1, COLUMNAS, 0, 0));
+        this.acciones = acciones;
 
         CrearUI();
     }
-     private void CrearUI() {
+
+    private void CrearUI() {
         setTitle("Connect 4");
-        setSize(700, 600);
+        setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(FILAS + 1, COLUMNAS));  // Additional row for column buttons
+        setLayout(null);
 
-        
-
+        panelUI.setSize(new Dimension(490, 490));
 
         // Create column buttons
-        
         for (int j = 0; j < COLUMNAS; j++) {
-            JButton columnButton = new JButton("Poner");
-            final int col = j;
-            columnButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //makeMove(col);
-                }
-            });
-            add(columnButton);
+
+            botonesColumna[j] = new JButton("↓");
+            botonesColumna[j].setFont(new Font("Arial", Font.PLAIN, 20));
+            botonesColumna[j].setForeground(Color.WHITE);
+            botonesColumna[j].setBackground(new Color(48, 32, 138));
+            botonesColumna[j].setActionCommand("poner" + j);
+            panelUI.add(botonesColumna[j]);
+
         }
 
-
-          
         // Create grid buttons
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
-                botones[i][j] = new JButton("");
-                botones[i][j].setEnabled(false);
-                botones[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
-                add(botones[i][j]);
+                labImagenes[i][j] = new JLabel(".");
+                labImagenes[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                panelUI.add(labImagenes[i][j]);
             }
         }
+
+        FondoTablero fondo = new FondoTablero();
+        setContentPane(fondo);
+        fondo.setLayout(null);
+
+        displayBoard();
+
+        panelUI.setBounds(165, 55, 350, 350);
+        fondo.add(panelUI);
 
         setVisible(true);
     }
-     
-     
-     public boolean RevisaGanador(char jugador) {
-        // Same win-checking logic as before
-        // Check horizontal, vertical, and diagonal wins
+
+    public void displayBoard() {
         for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS - 3; j++) {
-                if (tablero[i][j] == jugador && tablero[i][j + 1] == jugador && tablero[i][j + 2] == jugador && tablero[i][j + 3] == jugador) {
-                    return true;
-                }
-            }
-        }
-        for (int i = 0; i < FILAS - 3; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
-                if (tablero[i][j] == jugador && tablero[i + 1][j] == jugador && tablero[i + 2][j] == jugador && tablero[i + 3][j] == jugador) {
-                    return true;
-                }
+                labImagenes[i][j].setIcon(new ImageIcon(getClass().getResource("/imagenes/vacia.png")));
             }
         }
-        for (int i = 3; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS - 3; j++) {
-                if (tablero[i][j] == jugador && tablero[i - 1][j + 1] == jugador && tablero[i - 2][j + 2] == jugador && tablero[i - 3][j + 3] == jugador) {
-                    return true;
-                }
-            }
-        }
-        for (int i = 0; i < FILAS - 3; i++) {
-            for (int j = 0; j < COLUMNAS - 3; j++) {
-                if (tablero[i][j] == jugador && tablero[i + 1][j + 1] == jugador && tablero[i + 2][j + 2] == jugador && tablero[i + 3][j + 3] == jugador) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
-     
-     //Metodos del Observador
+    public void ponerFicha(int columna, Ficha ficha) {
+
+    }
+
+    //Metodos del Observador
     @Override
     public void actualizar() {
-        
-        //Realmente no se que hace el bloque de abajo
-        
-       /* for (int i =0; i< FILAS; i++){
-            for(int j=0; j< COLUMNAS; j++){
-                botones[i][j].setText(String.valueOf(tablero[i][j]));
-            }
-        }*/ 
-       
-       //Idea mia de que podría ir acá
-       
-       
+        ArrayList<Ficha> fichas = acciones.getTablero().getFichas();
+        ImageIcon imagen = null;
+        for(Ficha f : fichas){
+            imagen = f.getTipo().getTextura();
+            labImagenes[5-f.getFila()][f.getColumna()].setIcon(imagen);
+        }
     }
-    
-    
+
 }

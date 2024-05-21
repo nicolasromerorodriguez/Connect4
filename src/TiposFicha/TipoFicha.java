@@ -24,6 +24,10 @@ public class TipoFicha {
         return this.nombre;
     }
 
+    public ImageIcon getTextura() {
+        return textura;
+    }
+    
     public void setTextura(ImageIcon textura) {
         this.textura = textura;
     }

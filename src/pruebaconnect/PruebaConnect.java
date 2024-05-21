@@ -16,7 +16,7 @@ public class PruebaConnect {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VentanaJuego sexo = new VentanaJuego();
+        new GestorAcciones();
     }
     
 }

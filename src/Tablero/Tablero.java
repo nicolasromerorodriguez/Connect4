@@ -4,26 +4,36 @@
  */
 package Tablero;
 
+import Fabricas.FactoryAmarillas;
+import Fabricas.FactoryRojas;
+import Fichas.Ficha;
 import Observador.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author nicol
  */
-public class Tablero implements IObservado {
+public class Tablero implements IObservado{
+
     private static final int FILAS = 6;
     private static final int COLUMNAS = 7;
-    private Ficha[][] tablero;
+    public static final int AMARILLA = 1;
+    public static final int ROJA = 2;
+    private ArrayList<Ficha> fichas;
     private static Tablero instance;
-    private List<IObservador> observadores; //Declaracion de la lista de observadores
-    public char jugadorActual;
+    private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
+    private FactoryAmarillas facAmarillas;
+    private FactoryRojas facRojas;
     
     //Cada metodo que altere el tablero debe llamar a notificar()
-
     // Private constructor to prevent instantiation
     private Tablero() {
-        tablero = new Ficha[FILAS][COLUMNAS];
+        observadores = new ArrayList<>();
+        fichas = new ArrayList<>();
+        facAmarillas = new FactoryAmarillas();
+        facRojas = new FactoryRojas();
     }
 
     // Public method to provide access to the instance si
@@ -33,32 +43,33 @@ public class Tablero implements IObservado {
         }
         return instance;
     }
-
-    // Getter for the board
-    public Ficha[][] getTablero() {
-        return tablero;
-    }
-
-    public void limpiar() {
-        tablero = new Ficha[FILAS][COLUMNAS];
-    }
-
-    // Method to display the board (optional for console debugging)
-    /*public void displayBoard() {
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                System.out.print("|" + tablero[i][j]);
-            }
-            System.out.println("|");
-        }
-        for (int j = 0; j < COLUMNAS; j++) {
-            System.out.print(" " + j);
-        }
-        System.out.println();
-    }*/
-
     
-    //Metodos del observado
+    public void agregarFicha(int columna, int tipo){
+        int fila = 0;
+        
+        for(Ficha f : fichas){
+            if (f.getColumna() == columna){
+                fila++;
+            }
+        }
+        
+        switch(tipo){
+            case ROJA -> {
+                fichas.add(facRojas.crearFicha(fila, columna));
+                
+            }
+            case AMARILLA -> {
+                fichas.add(facAmarillas.crearFicha(fila, columna));
+            }
+        }
+        
+        notificarObservadores();
+    }
+
+    public ArrayList<Ficha> getFichas() {
+        return fichas;
+    }
+
     @Override
     public void agregar(IObservador observador) {
         observadores.add(observador);
@@ -76,4 +87,3 @@ public class Tablero implements IObservado {
         }
     }
 }
-

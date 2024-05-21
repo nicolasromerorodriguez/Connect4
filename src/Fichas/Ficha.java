@@ -23,6 +23,10 @@ public abstract class Ficha {
         this.tipo = tipo;
     }
 
+    public TipoFicha getTipo() {
+        return tipo;
+    }
+
     public int getFila() {
         return fila;
     }
