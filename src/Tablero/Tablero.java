@@ -4,6 +4,8 @@
  */
 package Tablero;
 
+import Comandos.Command;
+import Comandos.CommandHistory;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
 import Fichas.Ficha;
@@ -24,16 +26,16 @@ public class Tablero implements IObservado {
     private ArrayList<Ficha> fichas;
     private static Tablero instance;
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
-    private FactoryAmarillas facAmarillas;
-    private FactoryRojas facRojas;
+    
+    private CommandHistory history;
 
-    //Cada metodo que altere el tablero debe llamar a notificar()
+    // Cada metodo que altere el tablero debe llamar a notificar()
     // Private constructor to prevent instantiation
     private Tablero() {
+        history = new CommandHistory();
         observadores = new ArrayList<>();
         fichas = new ArrayList<>();
-        facAmarillas = new FactoryAmarillas();
-        facRojas = new FactoryRojas();
+        
     }
 
     // Public method to provide access to the instance si
@@ -42,38 +44,6 @@ public class Tablero implements IObservado {
             instance = new Tablero();
         }
         return instance;
-    }
-
-    public int agregarFicha(int columna, int tipo) {
-        int fila = 0;
-
-        for (Ficha f : fichas) {
-
-            if (f.getColumna() == columna) {
-                
-                if (fila > FILAS - 2){ return -1; }
-                
-                fila++;    
-            }
-        }
-
-        
-        switch (tipo) {
-            case ROJA -> {
-                fichas.add(facRojas.crearFicha(fila, columna));
-
-            }
-            case AMARILLA -> {
-                fichas.add(facAmarillas.crearFicha(fila, columna));
-            }
-            default -> {
-                System.out.println("hijueputa");
-            }
-        }
-
-        notificarObservadores();
-
-        return fila;
     }
 
     public ArrayList<Ficha> getFichas() {
@@ -96,4 +66,30 @@ public class Tablero implements IObservado {
             observador.actualizar();
         }
     }
+    
+    public int executeCommand(Command command) {
+        int filaFicha = command.execute();
+        if (filaFicha != -1) {
+            history.push(command);
+        }
+        return filaFicha;
+    }
+    
+    public void restaurarMovimiento() {
+        if (history.isEmpty()) return;
+
+        Command command = history.pop();
+        if (command != null) {
+            command.undo();
+            
+        }
+        
+    }
+
+    public void setFichas(ArrayList<Ficha> fichas) {
+        this.fichas = fichas;
+    }
+    
+    
+    
 }

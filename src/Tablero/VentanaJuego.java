@@ -24,6 +24,7 @@ public class VentanaJuego extends JFrame implements IObservador {
     private JPanel panelUI;
     private JLabel labInfo;
     public JLabel labTurno;
+    public JButton btnRestaurar;
     private GestorAcciones acciones;
 
     public VentanaJuego(GestorAcciones acciones) {
@@ -75,26 +76,31 @@ public class VentanaJuego extends JFrame implements IObservador {
         labInfo.setForeground(Color.white);
         labInfo.setHorizontalAlignment(SwingConstants.CENTER);
         labInfo.setBounds(570, 180, 100, 20);
-        
+
         labTurno = new JLabel("AMARILLAS");
         labTurno.setFont(new Font("Dubai Medium", Font.BOLD, 16));
         labTurno.setHorizontalAlignment(SwingConstants.CENTER);
         labTurno.setForeground(new Color(252, 227, 136));
         labTurno.setBounds(570, 200, 100, 20);
-        
+
         labLogo = new JLabel(".");
         labLogo.setIcon(new ImageIcon(getClass().getResource("/imagenes/logo.jpg")));
-        labLogo.setBounds(0,0,103,431);
-        
+        labLogo.setBounds(0, 0, 103, 431);
+
+        btnRestaurar = new JButton("Restaurar mov.");
+        btnRestaurar.setFont(new Font("Dubai", Font.BOLD, 13));
+        btnRestaurar.setForeground(Color.WHITE);
+        btnRestaurar.setBackground(new Color(48, 32, 138));
+        btnRestaurar.setActionCommand("restaurar");
+        btnRestaurar.setBounds(560, 400, 120, 20);
 
         displayBoard();
 
-        
-        
         fondo.add(labInfo);
         fondo.add(labTurno);
         fondo.add(panelUI);
         fondo.add(labLogo);
+        fondo.add(btnRestaurar);
 
         setVisible(true);
     }
@@ -110,13 +116,14 @@ public class VentanaJuego extends JFrame implements IObservador {
     //Metodos del Observador
     @Override
     public void actualizar() {
+        displayBoard();
         ArrayList<Ficha> fichas = acciones.getTablero().getFichas();
         ImageIcon imagen = null;
         for (Ficha f : fichas) {
             imagen = f.getTipo().getTextura();
             labImagenes[5 - f.getFila()][f.getColumna()].setIcon(imagen);
         }
-        
+
     }
 
 }

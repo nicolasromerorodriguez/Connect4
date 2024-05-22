@@ -4,6 +4,7 @@
  */
 package Tablero;
 
+import Comandos.ComandoPonerFicha;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
 import Observador.IObservado;
@@ -29,10 +30,10 @@ public class GestorAcciones implements ActionListener {
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
         tablero.agregarObservador(vista);
-        
+
         juego = new GestorJuego(this);
         tablero.agregarObservador(juego);
-        
+
         tablero.notificarObservadores();
 
         arrancarBotones();
@@ -41,24 +42,28 @@ public class GestorAcciones implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().startsWith("poner")) {
-            
+
             String index = e.getActionCommand().substring(5);
-            
+
             int columna = Integer.parseInt(index);
-            
+
             int actual = juego.getTurnoActual();
             
-            int fila = tablero.agregarFicha(columna, juego.getTurnoActual());
+            int fila = tablero.executeCommand(new ComandoPonerFicha(columna, actual, tablero));
             
             // Columna llena
-            if (fila == -1){
+            if (fila == -1) {
                 return;
             }
             
-            if(juego.comprobarGanador(fila, columna, actual)){
+            if (juego.comprobarGanador(fila, columna, actual)) {
                 JOptionPane.showMessageDialog(null, "Ganó " + actual);
                 System.exit(0);
             }
+
+        }
+        if (e.getActionCommand().equals("restaurar")){
+            tablero.restaurarMovimiento();
         }
     }
 
@@ -66,6 +71,8 @@ public class GestorAcciones implements ActionListener {
         for (JButton b : vista.botonesColumna) {
             b.addActionListener(this);
         }
+        
+        vista.btnRestaurar.addActionListener(this);
     }
 
     public Tablero getTablero() {

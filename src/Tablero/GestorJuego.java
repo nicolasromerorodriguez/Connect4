@@ -31,6 +31,7 @@ public class GestorJuego implements IObservador {
 
     @Override
     public void actualizar() {
+        
         cambiarTurno();
         cambiarTurnoUI(acciones.getVista().labTurno);
     }
