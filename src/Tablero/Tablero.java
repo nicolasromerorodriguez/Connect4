@@ -81,12 +81,12 @@ public class Tablero implements IObservado {
     }
 
     @Override
-    public void agregar(IObservador observador) {
+    public void agregarObservador(IObservador observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminar(IObservador observador) {
+    public void eliminarObservador(IObservador observador) {
         observadores.remove(observador);
     }
 

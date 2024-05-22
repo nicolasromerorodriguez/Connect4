@@ -9,7 +9,7 @@ package Observador;
  * @author nicol
  */
 public interface IObservado {
-    void agregar(IObservador observador);
-    void eliminar(IObservador observador);
+    void agregarObservador(IObservador observador);
+    void eliminarObservador(IObservador observador);
     void notificarObservadores();
 }

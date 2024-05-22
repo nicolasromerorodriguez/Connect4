@@ -67,29 +67,39 @@ public class GestorJuego implements IObservador {
             {0, 1}, // Derecha
             {0, -1}, // Izquierda
             {1, 1}, // Arriba a la derecha
-            {-1, 1}, // Abajo a la derecha
             {-1, -1}, // Abajo a la izquierda
+            {-1, 1}, // Abajo a la derecha
             {1, -1} // Arriba a la izquierda
         };
-
+        
+        int totalLinea = 1;
         // Recorrer cada dirección
         for (int[] direccion : direcciones) {
             int factorFila = direccion[0];
             int factorColumna = direccion[1];
-            if (comprobarDireccion(fila, columna, tipo, factorFila, factorColumna)) {
+            totalLinea += comprobarDireccion(fila, columna, tipo, factorFila, factorColumna);
+            
+            if (totalLinea >= 4) {
                 return true;
+            }
+            
+            // Se reinicia cuando cambia de direccion principal
+            if (direccion == direcciones[0] || direccion == direcciones[2] ||
+                    direccion == direcciones[4]){
+                totalLinea = 1;
             }
         }
 
         return false;
     }
 
-    private boolean comprobarDireccion(int fila, int columna, int tipo, int factorFila, int factorColumna) {
+    private int comprobarDireccion(int fila, int columna, int tipo, int factorFila, int factorColumna) {
         int fichasEnFila = 0;
 
         // Comprobar del 1 al 3
         for (int i = 1; i < 4; i++) {
             try {
+                
                 // Cuando no hay ficha en la direccion
                 if (fichas[fila + (factorFila * i)][columna + (factorColumna * i)] == null) {
                     break;
@@ -102,12 +112,12 @@ public class GestorJuego implements IObservador {
                     break;
                 }
             } catch (IndexOutOfBoundsException e) {
-                continue;
+                
             }
             
         }
 
-        return fichasEnFila == 3;
+        return fichasEnFila;
     }
 
     public int getTurnoActual() {
