@@ -4,6 +4,7 @@
  */
 package Tablero;
 
+import Fichas.Ficha;
 import Observador.IObservador;
 import java.awt.Color;
 import java.util.Random;
@@ -17,11 +18,9 @@ public class GestorJuego implements IObservador {
 
     private int turnoActual;
     private GestorAcciones acciones;
-    private Integer[][] fichas;
 
     public GestorJuego(GestorAcciones acciones) {
         Random r = new Random();
-        fichas = new Integer[Tablero.FILAS][Tablero.COLUMNAS];
 
         // Se elige al azar amarillo o rojo de quien empieza el juego
         this.turnoActual = r.nextInt(Tablero.AMARILLA, Tablero.ROJA + 1);
@@ -61,7 +60,6 @@ public class GestorJuego implements IObservador {
     }
 
     public boolean comprobarGanador(int fila, int columna, int tipo) {
-        fichas[fila][columna] = tipo;
 
         int[][] direcciones = {
             {-1, 0}, // Abajo
@@ -96,6 +94,10 @@ public class GestorJuego implements IObservador {
 
     private int comprobarDireccion(int fila, int columna, int tipo, int factorFila, int factorColumna) {
         int fichasEnFila = 0;
+        Ficha[][] fichas = acciones.getTablero().getFichas();
+        String nombreTipo;
+        if(tipo == Tablero.ROJA) nombreTipo = "ROJA";
+        else { nombreTipo = "AMARILLA"; }
 
         // Comprobar del 1 al 3
         for (int i = 1; i < 4; i++) {
@@ -107,7 +109,9 @@ public class GestorJuego implements IObservador {
                 }
 
                 // Cuenta fichas en linea hasta llegar a 3
-                if (fichas[fila + factorFila * i][columna + (factorColumna * i)] == tipo) {
+                if (fichas[fila + factorFila * i][columna + (factorColumna * i)]
+                    .getTipo().getNombre().equals(nombreTipo)) {
+                    
                     fichasEnFila++;
                 } else {
                     break;

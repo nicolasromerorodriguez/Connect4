@@ -17,7 +17,7 @@ import static Tablero.Tablero.ROJA;
  * @author cesar
  */
 public class ComandoPonerFicha extends Command {
-    
+
     private int columna;
     private int tipo;
     private FactoryAmarillas facAmarillas;
@@ -33,45 +33,44 @@ public class ComandoPonerFicha extends Command {
 
     @Override
     public int execute() {
-        
+
         backup();
-        
+
         int fila = 0;
 
-        for (Ficha f : tablero.getFichas()) {
+        for (Ficha[] row : tablero.getFichas()) {
 
-            if (f.getColumna() == columna) {
-                
-                if (fila > FILAS - 2) return -1;
-                
-                fila++;    
+            for (Ficha f : row) {
+                if (f == null){
+                    continue;
+                }
+                if (f.getColumna() == columna) {
+
+                    if (fila > FILAS - 2) {
+                        return -1;
+                    }
+
+                    fila++;
+                }
             }
         }
 
-        
         switch (tipo) {
             case ROJA -> {
-                tablero.getFichas().add(facRojas.crearFicha(fila, columna));
+                tablero.getFichas()[fila][columna] = facRojas.crearFicha(fila, columna);
 
             }
             case AMARILLA -> {
-                tablero.getFichas().add(facAmarillas.crearFicha(fila, columna));
+                tablero.getFichas()[fila][columna] = facAmarillas.crearFicha(fila, columna);
             }
             default -> {
-               
+
             }
         }
-        
-        for (Ficha f : backup){
-            System.out.println( f.getFila()+ " " +f.getColumna()+ " "+f.getTipo().getNombre());
-        }
-        System.out.println("........");
-        
+
         tablero.notificarObservadores();
-        
+
         return fila;
     }
-    
-
 
 }

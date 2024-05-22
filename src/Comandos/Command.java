@@ -10,6 +10,7 @@ package Comandos;
  */
 import Fichas.Ficha;
 import Tablero.Tablero;
+import static Tablero.Tablero.FILAS;
 import java.util.ArrayList;
 
 public abstract class Command {
@@ -17,18 +18,33 @@ public abstract class Command {
     protected ArrayList<Ficha> backup;
 
     public Command(Tablero tablero) {
+        this.backup = new ArrayList<>();
         this.tablero = tablero;
     }
 
     public void backup() {
-        ArrayList<Ficha> tempFichas = new ArrayList<>(tablero.getFichas());
-        backup = tempFichas;
+        
+        
+        // Almacenar en backup
+        for (Ficha[] row : tablero.getFichas()) {
 
+            for (Ficha f : row) {
+                if (f == null){
+                    continue;
+                }
+                backup.add(f);
+                
+            }
+        }
+        
     }
 
     public void undo() {
-
-        tablero.setFichas(new ArrayList<>(backup));
+        tablero.setFichas(new Ficha[Tablero.FILAS][Tablero.COLUMNAS]);
+        
+        for(Ficha f : backup){
+            tablero.getFichas()[f.getFila()][f.getColumna()] = f;
+        }
 
         tablero.notificarObservadores();
     }

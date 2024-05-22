@@ -117,11 +117,16 @@ public class VentanaJuego extends JFrame implements IObservador {
     @Override
     public void actualizar() {
         displayBoard();
-        ArrayList<Ficha> fichas = acciones.getTablero().getFichas();
+        Ficha[][] fichas = acciones.getTablero().getFichas();
         ImageIcon imagen = null;
-        for (Ficha f : fichas) {
-            imagen = f.getTipo().getTextura();
-            labImagenes[5 - f.getFila()][f.getColumna()].setIcon(imagen);
+        for (Ficha[] fila : fichas) {
+            for (Ficha f : fila) {
+                if (f == null){
+                    continue;
+                }
+                imagen = f.getTipo().getTextura();
+                labImagenes[5 - f.getFila()][f.getColumna()].setIcon(imagen);
+            }
         }
 
     }

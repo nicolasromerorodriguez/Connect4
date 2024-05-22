@@ -23,7 +23,7 @@ public class Tablero implements IObservado {
     public static final int COLUMNAS = 7;
     public static final int AMARILLA = 1;
     public static final int ROJA = 2;
-    private ArrayList<Ficha> fichas;
+    private Ficha[][] fichas;
     private static Tablero instance;
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
     
@@ -34,7 +34,7 @@ public class Tablero implements IObservado {
     private Tablero() {
         history = new CommandHistory();
         observadores = new ArrayList<>();
-        fichas = new ArrayList<>();
+        fichas = new Ficha[FILAS][COLUMNAS];
         
     }
 
@@ -46,9 +46,6 @@ public class Tablero implements IObservado {
         return instance;
     }
 
-    public ArrayList<Ficha> getFichas() {
-        return fichas;
-    }
 
     @Override
     public void agregarObservador(IObservador observador) {
@@ -86,10 +83,13 @@ public class Tablero implements IObservado {
         
     }
 
-    public void setFichas(ArrayList<Ficha> fichas) {
+    public Ficha[][] getFichas() {
+        return fichas;
+    }
+
+    public void setFichas(Ficha[][] fichas) {
         this.fichas = fichas;
     }
-    
     
     
 }

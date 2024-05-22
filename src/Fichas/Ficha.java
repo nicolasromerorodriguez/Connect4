@@ -9,7 +9,7 @@ import TiposFicha.TipoFicha;
  *
  * @author nicol
  */
-public abstract class Ficha {
+public abstract class Ficha{
     protected int fila;
     protected int columna;
     protected TipoFicha tipo;

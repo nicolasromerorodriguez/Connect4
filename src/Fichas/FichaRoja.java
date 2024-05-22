@@ -19,7 +19,7 @@ public class FichaRoja extends Ficha {
 
     public FichaRoja(int fila, int columna) {
         super(fila, columna);
-        setTipo(FabricaTipos.getTipoFicha("ROJO", new ImageIcon(getClass().getResource(rutaTextura))));
+        setTipo(FabricaTipos.getTipoFicha("ROJA", new ImageIcon(getClass().getResource(rutaTextura))));
     }
     
 }
