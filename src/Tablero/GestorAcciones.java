@@ -11,6 +11,8 @@ import Observador.IObservador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,12 +22,18 @@ public class GestorAcciones implements ActionListener {
 
     private VentanaJuego vista;
     private Tablero tablero;
+    private GestorJuego juego;
 
     public GestorAcciones() {
 
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
         tablero.agregar(vista);
+        
+        juego = new GestorJuego(this);
+        tablero.agregar(juego);
+        
+        tablero.notificarObservadores();
 
         arrancarBotones();
     }
@@ -38,8 +46,19 @@ public class GestorAcciones implements ActionListener {
             
             int columna = Integer.parseInt(index);
             
-            // Por el momento agrega solo rojas
-            tablero.agregarFicha(columna, Tablero.ROJA);
+            int actual = juego.getTurnoActual();
+            
+            int fila = tablero.agregarFicha(columna, juego.getTurnoActual());
+            
+            // Columna llena
+            if (fila == -1){
+                return;
+            }
+            
+            if(juego.comprobarGanador(fila, columna, actual)){
+                JOptionPane.showMessageDialog(null, "Ganó " + actual);
+                System.exit(0);
+            }
         }
     }
 
@@ -51,6 +70,10 @@ public class GestorAcciones implements ActionListener {
 
     public Tablero getTablero() {
         return tablero;
+    }
+
+    public VentanaJuego getVista() {
+        return vista;
     }
 
 }

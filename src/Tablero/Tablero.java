@@ -15,10 +15,10 @@ import java.util.List;
  *
  * @author nicol
  */
-public class Tablero implements IObservado{
+public class Tablero implements IObservado {
 
-    private static final int FILAS = 6;
-    private static final int COLUMNAS = 7;
+    public static final int FILAS = 6;
+    public static final int COLUMNAS = 7;
     public static final int AMARILLA = 1;
     public static final int ROJA = 2;
     private ArrayList<Ficha> fichas;
@@ -26,7 +26,7 @@ public class Tablero implements IObservado{
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
     private FactoryAmarillas facAmarillas;
     private FactoryRojas facRojas;
-    
+
     //Cada metodo que altere el tablero debe llamar a notificar()
     // Private constructor to prevent instantiation
     private Tablero() {
@@ -43,27 +43,37 @@ public class Tablero implements IObservado{
         }
         return instance;
     }
-    
-    public void agregarFicha(int columna, int tipo){
+
+    public int agregarFicha(int columna, int tipo) {
         int fila = 0;
-        
-        for(Ficha f : fichas){
-            if (f.getColumna() == columna){
-                fila++;
+
+        for (Ficha f : fichas) {
+
+            if (f.getColumna() == columna) {
+                
+                if (fila > FILAS - 2){ return -1; }
+                
+                fila++;    
             }
         }
+
         
-        switch(tipo){
+        switch (tipo) {
             case ROJA -> {
                 fichas.add(facRojas.crearFicha(fila, columna));
-                
+
             }
             case AMARILLA -> {
                 fichas.add(facAmarillas.crearFicha(fila, columna));
             }
+            default -> {
+                System.out.println("hijueputa");
+            }
         }
-        
+
         notificarObservadores();
+
+        return fila;
     }
 
     public ArrayList<Ficha> getFichas() {
@@ -82,7 +92,7 @@ public class Tablero implements IObservado{
 
     @Override
     public void notificarObservadores() {
-        for(IObservador observador : observadores){
+        for (IObservador observador : observadores) {
             observador.actualizar();
         }
     }
