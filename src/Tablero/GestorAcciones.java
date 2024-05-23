@@ -26,8 +26,6 @@ public class GestorAcciones implements ActionListener {
     private GestorJuego juego;
 
     public GestorAcciones() {
-        
-        
 
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
@@ -41,7 +39,6 @@ public class GestorAcciones implements ActionListener {
         arrancarBotones();
     }
 
-    
     //Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,21 +49,22 @@ public class GestorAcciones implements ActionListener {
             int columna = Integer.parseInt(index);
 
             int actual = juego.getTurnoActual();
-            
+
             int fila = tablero.executeCommand(new ComandoPonerFicha(columna, actual, tablero));
-            
+
             // Columna llena
             if (fila == -1) {
                 return;
             }
             
             if (juego.comprobarGanador(fila, columna, actual)) {
-                JOptionPane.showMessageDialog(null, "Ganó " + actual);
+                String color = actual == Tablero.AMARILLA ? "amarillas" : "rojas"; // Asigna color a mostrar
+                JOptionPane.showMessageDialog(vista, "Ganaron las " + color);
                 System.exit(0);
             }
 
         }
-        if (e.getActionCommand().equals("restaurar")){
+        if (e.getActionCommand().equals("restaurar")) {
             tablero.restaurarMovimiento();
         }
     }
@@ -75,7 +73,7 @@ public class GestorAcciones implements ActionListener {
         for (JButton b : vista.botonesColumna) {
             b.addActionListener(this);
         }
-        
+
         vista.btnRestaurar.addActionListener(this);
     }
 

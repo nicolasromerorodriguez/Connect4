@@ -10,7 +10,7 @@ package Observador;
  */
 public interface IObservado {
     
-    //Define metodos para el observado, applicando el patron observer
+    //Define metodos para el observado, aplicando el patron observer
     void agregarObservador(IObservador observador);
     void eliminarObservador(IObservador observador);
     void notificarObservadores();

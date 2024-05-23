@@ -13,14 +13,14 @@ import Tablero.Tablero;
 import static Tablero.Tablero.FILAS;
 import java.util.ArrayList;
 
-public abstract class Command {
+public abstract class Comando {
     
     
     
     public Tablero tablero;
     protected ArrayList<Ficha> backup;
 
-    public Command(Tablero tablero) {
+    public Comando(Tablero tablero) {
         this.backup = new ArrayList<>();
         this.tablero = tablero;
     }

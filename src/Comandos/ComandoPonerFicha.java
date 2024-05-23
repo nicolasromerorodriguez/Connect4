@@ -16,7 +16,7 @@ import static Tablero.Tablero.ROJA;
  *
  * @author nicol
  */
-public class ComandoPonerFicha extends Command {
+public class ComandoPonerFicha extends Comando {
 
     private int columna;
     private int tipo;
@@ -24,7 +24,7 @@ public class ComandoPonerFicha extends Command {
     private FactoryRojas facRojas;
 
     
-    
+    // Define columna en que se va a poner la ficha y su tipo
     public ComandoPonerFicha(int columna, int tipo, Tablero tablero) {
         super(tablero);
         this.columna = columna;
@@ -40,14 +40,18 @@ public class ComandoPonerFicha extends Command {
 
         int fila = 0;
 
-        for (Ficha[] row : tablero.getFichas()) {
+        for (Ficha[] fichasFila : tablero.getFichas()) {
 
-            for (Ficha f : row) {
+            for (Ficha f : fichasFila) {
+                
                 if (f == null){
                     continue;
                 }
+                
+                // Cuenta las fichas que ya hay en la columna en la que se va a colocar
                 if (f.getColumna() == columna) {
-
+                    
+                    // Ya está llena la columna
                     if (fila > FILAS - 2) {
                         return -1;
                     }
@@ -56,7 +60,8 @@ public class ComandoPonerFicha extends Command {
                 }
             }
         }
-
+        
+        // Usa las factorías para crear la ficha a colocar en el tablero
         switch (tipo) {
             case ROJA -> {
                 tablero.getFichas()[fila][columna] = facRojas.crearFicha(fila, columna);

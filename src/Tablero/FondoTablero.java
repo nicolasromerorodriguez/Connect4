@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  */
 class FondoTablero extends JPanel {
     
-    //pone el fondo del tablero
+    // Pone el fondo del tablero
     private Image imagen;
 
     public FondoTablero() {

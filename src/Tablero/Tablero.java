@@ -4,8 +4,8 @@
  */
 package Tablero;
 
-import Comandos.Command;
-import Comandos.CommandHistory;
+import Comandos.Comando;
+import Comandos.HistorialComando;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
 import Fichas.Ficha;
@@ -29,14 +29,14 @@ public class Tablero implements IObservado {
     private static Tablero instance; //Referencia a la unica innstancia del tablero
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
     
-    private CommandHistory history;
+    private HistorialComando history;
 
     // Cada metodo que altere el tablero debe llamar a notificar()
     // Private constructor to prevent instantiation
     private Tablero() {
         
         //Instancias de las clases anteriores
-        history = new CommandHistory();
+        history = new HistorialComando();
         observadores = new ArrayList<>();
         fichas = new Ficha[FILAS][COLUMNAS];  //Define el tablero como un arreglo de 
         
@@ -70,7 +70,7 @@ public class Tablero implements IObservado {
     }
     
     //metodo que permite realizar jugadas
-    public int executeCommand(Command command) {
+    public int executeCommand(Comando command) {
         int filaFicha = command.execute();
         if (filaFicha != -1) {
             history.push(command);
@@ -81,7 +81,7 @@ public class Tablero implements IObservado {
     public void restaurarMovimiento() {
         if (history.isEmpty()) return;
 
-        Command command = history.pop();
+        Comando command = history.pop();
         if (command != null) {
             command.undo();
             

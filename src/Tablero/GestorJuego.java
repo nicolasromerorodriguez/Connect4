@@ -16,7 +16,6 @@ import javax.swing.JLabel;
  */
 public class GestorJuego implements IObservador {
     
-    //Parte de los observadores
     //Maneja el orden de los turnos, define ganador
 
     private int turnoActual;
@@ -77,6 +76,7 @@ public class GestorJuego implements IObservador {
         };
         
         int totalLinea = 1;
+        
         // Recorrer cada dirección
         for (int[] direccion : direcciones) {
             int factorFila = direccion[0];
