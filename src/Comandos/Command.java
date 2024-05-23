@@ -14,6 +14,9 @@ import static Tablero.Tablero.FILAS;
 import java.util.ArrayList;
 
 public abstract class Command {
+    
+    
+    
     public Tablero tablero;
     protected ArrayList<Ficha> backup;
 

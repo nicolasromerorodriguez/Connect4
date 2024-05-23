@@ -13,7 +13,10 @@ import javax.swing.ImageIcon;
  */
 public class FichaAmarilla extends Ficha {
     
-    private static final String rutaTextura = "/imagenes/amarilla.png";
+    
+    //Producto concreto de las fichas
+    
+    private static final String rutaTextura = "/imagenes/amarilla.png"; //Aplica la textura para la ficha
 
     public FichaAmarilla(int fila, int columna) {
         super(fila, columna);

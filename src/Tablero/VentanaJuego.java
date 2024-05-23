@@ -17,6 +17,8 @@ import Observador.*;
 import java.util.ArrayList;
 
 public class VentanaJuego extends JFrame implements IObservador {
+    
+    //Esta clase funciona como interfaz grafica para el tablero
 
     public JButton[] botonesColumna;
     public JLabel[][] labImagenes;
@@ -24,9 +26,11 @@ public class VentanaJuego extends JFrame implements IObservador {
     private JPanel panelUI;
     private JLabel labInfo;
     public JLabel labTurno;
-    public JButton btnRestaurar;
-    private GestorAcciones acciones;
+    public JButton btnRestaurar; //Boton para retroceder jugadas
+    private GestorAcciones acciones; 
 
+    
+    //,etodo que genera visualmente el tablero
     public VentanaJuego(GestorAcciones acciones) {
         botonesColumna = new JButton[Tablero.COLUMNAS];
         labImagenes = new JLabel[Tablero.FILAS][Tablero.COLUMNAS];
@@ -36,6 +40,8 @@ public class VentanaJuego extends JFrame implements IObservador {
         CrearUI();
     }
 
+    
+    //Metodo que establece los parametros del tablero
     private void CrearUI() {
         setTitle("Connect 4");
         setSize(700, 500);
@@ -46,7 +52,7 @@ public class VentanaJuego extends JFrame implements IObservador {
 
         panelUI.setBounds(165, 55, 350, 350);
 
-        // Create column buttons
+        // Genera botones de columnas
         for (int j = 0; j < Tablero.COLUMNAS; j++) {
 
             botonesColumna[j] = new JButton("↓");
@@ -58,7 +64,7 @@ public class VentanaJuego extends JFrame implements IObservador {
 
         }
 
-        // Create grid buttons
+        //Genera botones de la rejilla
         for (int i = 0; i < Tablero.FILAS; i++) {
             for (int j = 0; j < Tablero.COLUMNAS; j++) {
                 labImagenes[i][j] = new JLabel(".");
@@ -67,6 +73,7 @@ public class VentanaJuego extends JFrame implements IObservador {
             }
         }
 
+        //Paraametros esteticos para el fondo
         FondoTablero fondo = new FondoTablero();
         setContentPane(fondo);
         fondo.setLayout(null);
@@ -105,6 +112,7 @@ public class VentanaJuego extends JFrame implements IObservador {
         setVisible(true);
     }
 
+    //Ubica las imagenes que se muestran en la rejilla
     public void displayBoard() {
         for (int i = 0; i < Tablero.FILAS; i++) {
             for (int j = 0; j < Tablero.COLUMNAS; j++) {

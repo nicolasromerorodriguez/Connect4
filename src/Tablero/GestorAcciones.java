@@ -26,6 +26,8 @@ public class GestorAcciones implements ActionListener {
     private GestorJuego juego;
 
     public GestorAcciones() {
+        
+        
 
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
@@ -39,6 +41,8 @@ public class GestorAcciones implements ActionListener {
         arrancarBotones();
     }
 
+    
+    //Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().startsWith("poner")) {

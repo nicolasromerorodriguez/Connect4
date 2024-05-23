@@ -9,10 +9,13 @@ import Fichas.FichaAmarilla;
 
 /**
  *
- * @author cesar
+ * @author nicol
  */
 public class FactoryAmarillas extends FactoryFichas {
-
+    
+    //Creador concreto de Fichas amarillas
+    
+    //Metodo heredado de Factory fichas para crear fichas amarillas
     @Override
     public Ficha crearFicha(int fila, int columna) {
         return new FichaAmarilla(fila, columna);

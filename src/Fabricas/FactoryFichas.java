@@ -12,6 +12,7 @@ import Fichas.Ficha;
  */
 public abstract class FactoryFichas {
     
+    //Establece la interfaz para aplicar factory method en las fichas rojas y amarillas
     public abstract Ficha crearFicha(int fila, int columna);
     
 }

@@ -14,7 +14,7 @@ import static Tablero.Tablero.ROJA;
 
 /**
  *
- * @author cesar
+ * @author nicol
  */
 public class ComandoPonerFicha extends Command {
 
@@ -23,6 +23,8 @@ public class ComandoPonerFicha extends Command {
     private FactoryAmarillas facAmarillas;
     private FactoryRojas facRojas;
 
+    
+    
     public ComandoPonerFicha(int columna, int tipo, Tablero tablero) {
         super(tablero);
         this.columna = columna;

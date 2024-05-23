@@ -15,6 +15,9 @@ import javax.swing.JLabel;
  * @author cesar
  */
 public class GestorJuego implements IObservador {
+    
+    //Parte de los observadores
+    //Maneja el orden de los turnos, define ganador
 
     private int turnoActual;
     private GestorAcciones acciones;
@@ -48,6 +51,7 @@ public class GestorJuego implements IObservador {
         }
     }
 
+    //Metodo para cambiar de turno
     public void cambiarTurno() {
         switch (turnoActual) {
             case Tablero.AMARILLA -> {
@@ -59,6 +63,7 @@ public class GestorJuego implements IObservador {
         }
     }
 
+    //Metodo para comprobar el ganador
     public boolean comprobarGanador(int fila, int columna, int tipo) {
 
         int[][] direcciones = {

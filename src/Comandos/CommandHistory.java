@@ -11,6 +11,8 @@ package Comandos;
 import java.util.Stack;
 
 public class CommandHistory {
+    
+    //Permite guardar las jugadas
     private Stack<Command> history = new Stack<>();
 
     public void push(Command c) {

@@ -18,13 +18,15 @@ import java.util.List;
  * @author nicol
  */
 public class Tablero implements IObservado {
+    
+    //Esta clase representa el tablero
 
-    public static final int FILAS = 6;
-    public static final int COLUMNAS = 7;
-    public static final int AMARILLA = 1;
-    public static final int ROJA = 2;
-    private Ficha[][] fichas;
-    private static Tablero instance;
+    public static final int FILAS = 6;  //Constante que define el numero de filas del tablero
+    public static final int COLUMNAS = 7; //Constante que define el numero de columnas del tablero
+    public static final int AMARILLA = 1; //Establece el numero de jugador que epresentan las fichas amarillas
+    public static final int ROJA = 2; //Establece el numero de jugador que epresentan las fichas rojas
+    private Ficha[][] fichas; //Define una matriz de fichas para establecer el tableo
+    private static Tablero instance; //Referencia a la unica innstancia del tablero
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
     
     private CommandHistory history;
@@ -32,13 +34,15 @@ public class Tablero implements IObservado {
     // Cada metodo que altere el tablero debe llamar a notificar()
     // Private constructor to prevent instantiation
     private Tablero() {
+        
+        //Instancias de las clases anteriores
         history = new CommandHistory();
         observadores = new ArrayList<>();
-        fichas = new Ficha[FILAS][COLUMNAS];
+        fichas = new Ficha[FILAS][COLUMNAS];  //Define el tablero como un arreglo de 
         
     }
 
-    // Public method to provide access to the instance si
+    // Metodo publico que da acceso a la instancia del tablero 
     public static Tablero getInstance() {
         if (instance == null) {
             instance = new Tablero();
@@ -47,6 +51,7 @@ public class Tablero implements IObservado {
     }
 
 
+    //Metodos implementados de IObservado para el patron observer
     @Override
     public void agregarObservador(IObservador observador) {
         observadores.add(observador);
@@ -64,6 +69,7 @@ public class Tablero implements IObservado {
         }
     }
     
+    //metodo que permite realizar jugadas
     public int executeCommand(Command command) {
         int filaFicha = command.execute();
         if (filaFicha != -1) {

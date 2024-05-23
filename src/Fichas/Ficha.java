@@ -10,9 +10,14 @@ import TiposFicha.TipoFicha;
  * @author nicol
  */
 public abstract class Ficha{
+    
+    //Producto abstracto de las fichas
+    
+    
+    //Define los atributos de las fichas 
     protected int fila;
     protected int columna;
-    protected TipoFicha tipo;
+    protected TipoFicha tipo; //Aplica el tipo de ficha
 
     protected Ficha(int fila, int columna) {
         this.fila = fila;
