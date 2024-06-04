@@ -51,4 +51,9 @@ public class GestorJuegoContador extends DecoradorGestorJuego {
     public int getContadorTurnos() {
         return contadorTurnos;
     }
+    
+    public void correctorTurnos(){
+        contadorTurnos -=2;
+    }
+    
 }
