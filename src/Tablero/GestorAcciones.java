@@ -5,6 +5,8 @@
 package Tablero;
 
 import Comandos.ComandoPonerFicha;
+import Decorador.DecoradorGestorJuego;
+import Decorador.IGestorJuego;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
 import Observador.IObservado;
@@ -23,7 +25,8 @@ public class GestorAcciones implements ActionListener {
 
     private VentanaJuego vista;
     private Tablero tablero;
-    private GestorJuego juego;
+    private IGestorJuego juego;
+    
 
     public GestorAcciones() {
 
