@@ -13,6 +13,7 @@ import Observador.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Decorador.*;
 /**
  *
  * @author nicol
@@ -30,6 +31,12 @@ public class Tablero implements IObservado {
     private ArrayList<IObservador> observadores; //Declaracion de la lista de observadores
     
     private HistorialComando history;
+    
+    
+   
+    
+    
+    
 
     // Cada metodo que altere el tablero debe llamar a notificar()
     // Private constructor to prevent instantiation

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Tablero/VentanaJuego.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Observador/IObservado.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Tablero/GestorAcciones.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fichas/FichaAmarilla.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Tablero/GestorJuego.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Comandos/Comando.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fichas/FichaRoja.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Decorador/GestorJuegoContador.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/TiposFicha/FabricaTipos.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fabricas/FactoryFichas.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fichas/Ficha.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Tablero/FondoTablero.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Decorador/DecoradorGestorJuego.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fabricas/FactoryRojas.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Decorador/IGestorJuego.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Observador/IObservador.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Comandos/HistorialComando.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Fabricas/FactoryAmarillas.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Tablero/Tablero.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Connect4/Launcher.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/Comandos/ComandoPonerFicha.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Documentos/GitHub/Connect4/src/TiposFicha/TipoFicha.java</file>
+        </group>
+    </open-files>
+</project-private>
