@@ -4,8 +4,10 @@
  */
 package Tablero;
 
+import Decorador.GestorJuego;
 import Comandos.ComandoPonerFicha;
 import Decorador.DecoradorGestorJuego;
+import Decorador.GestorJuegoContador;
 import Decorador.IGestorJuego;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
@@ -25,7 +27,7 @@ public class GestorAcciones implements ActionListener {
 
     private VentanaJuego vista;
     private Tablero tablero;
-    private IGestorJuego juego;
+    private GestorJuegoContador juego;
     
 
     public GestorAcciones() {
@@ -34,7 +36,7 @@ public class GestorAcciones implements ActionListener {
         tablero = Tablero.getInstance();
         tablero.agregarObservador(vista);
 
-        juego = new GestorJuego(this);
+        juego = new GestorJuegoContador(new GestorJuego(this));
         tablero.agregarObservador(juego);
 
         tablero.notificarObservadores();
@@ -60,15 +62,17 @@ public class GestorAcciones implements ActionListener {
                 return;
             }
             
-            if (juego.comprobarGanador(fila, columna, actual)) {
-                String color = actual == Tablero.AMARILLA ? "amarillas" : "rojas"; // Asigna color a mostrar
-                JOptionPane.showMessageDialog(vista, "Ganaron las " + color);
+            String mensaje = juego.comprobarGanador(fila, columna, actual);
+            
+            if (mensaje != null) {
+                JOptionPane.showMessageDialog(vista, mensaje);
                 System.exit(0);
             }
 
         }
         if (e.getActionCommand().equals("restaurar")) {
             tablero.restaurarMovimiento();
+            juego.correctorTurnos();
         }
     }
 

@@ -17,7 +17,7 @@ public interface IGestorJuego extends IObservador{
     
     void cambiarTurnoUI(JLabel label);
     void cambiarTurno();
-    boolean comprobarGanador(int fila, int columna, int tipo);
+    String comprobarGanador(int fila, int columna, int tipo);
     int getTurnoActual();
    
 }

@@ -35,7 +35,7 @@ public abstract class DecoradorGestorJuego implements IGestorJuego {
     }
 
     @Override
-    public boolean comprobarGanador(int fila, int columna, int tipo) {
+    public String comprobarGanador(int fila, int columna, int tipo) {
         return gestorJuego.comprobarGanador(fila, columna, tipo);
     }
 

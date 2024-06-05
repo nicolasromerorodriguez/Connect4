@@ -38,8 +38,9 @@ public class GestorJuegoContador extends DecoradorGestorJuego {
     }
 
      @Override
-    public boolean comprobarGanador(int fila, int columna, int tipo) {
-        return gestorJuego.comprobarGanador(fila, columna, tipo);
+    public String comprobarGanador(int fila, int columna, int tipo) {
+        return gestorJuego.comprobarGanador(fila, columna, tipo) +
+                " en un total de " + ((contadorTurnos/2) + 1) + " turnos";
     }
 
     

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Tablero;
+package Decorador;
 
 import Fichas.Ficha;
 import Observador.IObservador;
@@ -15,6 +15,8 @@ import javax.swing.JLabel;
  * @author cesar
  */
 import Decorador.*;
+import Tablero.GestorAcciones;
+import Tablero.Tablero;
 
 public class GestorJuego implements IGestorJuego {
     
@@ -70,7 +72,7 @@ public class GestorJuego implements IGestorJuego {
 
     //Metodo para comprobar el ganador
     @Override
-    public boolean comprobarGanador(int fila, int columna, int tipo) {
+    public String comprobarGanador(int fila, int columna, int tipo) {
 
         int[][] direcciones = {
             {-1, 0}, // Abajo
@@ -91,7 +93,7 @@ public class GestorJuego implements IGestorJuego {
             totalLinea += comprobarDireccion(fila, columna, tipo, factorFila, factorColumna);
             
             if (totalLinea >= 4) {
-                return true;
+                return "Ganaron las " + (turnoActual == Tablero.AMARILLA ? "amarillas" : "rojas");
             }
             
             // Se reinicia cuando cambia de direccion principal
@@ -101,7 +103,7 @@ public class GestorJuego implements IGestorJuego {
             }
         }
 
-        return false;
+        return null;
     }
 
     
