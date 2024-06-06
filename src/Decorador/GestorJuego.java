@@ -14,7 +14,6 @@ import javax.swing.JLabel;
  *
  * @author cesar
  */
-import Decorador.*;
 import Tablero.GestorAcciones;
 import Tablero.Tablero;
 
@@ -93,7 +92,7 @@ public class GestorJuego implements IGestorJuego {
             totalLinea += comprobarDireccion(fila, columna, tipo, factorFila, factorColumna);
             
             if (totalLinea >= 4) {
-                return "Ganaron las " + (turnoActual == Tablero.AMARILLA ? "amarillas" : "rojas");
+                return "Ganaron las " + (tipo == Tablero.AMARILLA ? "amarillas" : "rojas");
             }
             
             // Se reinicia cuando cambia de direccion principal

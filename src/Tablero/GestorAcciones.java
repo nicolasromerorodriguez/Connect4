@@ -35,11 +35,10 @@ public class GestorAcciones implements ActionListener {
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
         tablero.agregarObservador(vista);
-
-        juego = new GestorJuegoContador(new GestorJuego(this));
+        GestorJuego juegoPrincipal = new GestorJuego(this);
+        juego = new GestorJuegoContador(juegoPrincipal);
         tablero.agregarObservador(juego);
-
-        tablero.notificarObservadores();
+        
 
         arrancarBotones();
     }

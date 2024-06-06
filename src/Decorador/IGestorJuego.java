@@ -15,9 +15,9 @@ import javax.swing.*;
 public interface IGestorJuego extends IObservador{
     
     
-    void cambiarTurnoUI(JLabel label);
-    void cambiarTurno();
-    String comprobarGanador(int fila, int columna, int tipo);
-    int getTurnoActual();
+    public void cambiarTurnoUI(JLabel label);
+    public void cambiarTurno();
+    public String comprobarGanador(int fila, int columna, int tipo);
+    public int getTurnoActual();
    
 }

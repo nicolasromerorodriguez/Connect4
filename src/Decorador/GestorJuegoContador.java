@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 
 //Funciona como el decrador concreto del patron decorator
 public class GestorJuegoContador extends DecoradorGestorJuego {
-     private IGestorJuego gestorJuego;
     private int contadorTurnos;
 
     public GestorJuegoContador(IGestorJuego gestorJuego) {
@@ -23,30 +22,35 @@ public class GestorJuegoContador extends DecoradorGestorJuego {
 
      @Override
     public void actualizar() {
-        gestorJuego.actualizar();
+        super.gestorJuego.actualizar();
         contadorTurnos++;
     }
 
      @Override
     public void cambiarTurnoUI(JLabel label) {
-        gestorJuego.cambiarTurnoUI(label);
+        super.gestorJuego.cambiarTurnoUI(label);
     }
 
      @Override
     public void cambiarTurno() {
-        gestorJuego.cambiarTurno();
+        super.gestorJuego.cambiarTurno();
     }
 
      @Override
     public String comprobarGanador(int fila, int columna, int tipo) {
-        return gestorJuego.comprobarGanador(fila, columna, tipo) +
-                " en un total de " + ((contadorTurnos/2) + 1) + " turnos";
+        String mensaje = super.gestorJuego.comprobarGanador(fila, columna, tipo);
+        
+        if(mensaje == null){
+            return null;
+        }
+        
+        return  mensaje + " en un total de " + (int)Math.ceil((double)contadorTurnos/2) + " turnos";
     }
 
     
      @Override
     public int getTurnoActual() {
-        return gestorJuego.getTurnoActual();
+        return super.gestorJuego.getTurnoActual();
     }
 
     public int getContadorTurnos() {
