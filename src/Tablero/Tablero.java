@@ -104,5 +104,11 @@ public class Tablero implements IObservado {
         this.fichas = fichas;
     }
     
+    public void vaciar(){
+        fichas = new Ficha[FILAS][COLUMNAS];
+        notificarObservadores();
+        history = new HistorialComando();
+    }
+    
     
 }

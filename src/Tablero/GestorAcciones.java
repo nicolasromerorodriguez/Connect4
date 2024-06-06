@@ -35,8 +35,7 @@ public class GestorAcciones implements ActionListener {
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
         tablero.agregarObservador(vista);
-        GestorJuego juegoPrincipal = new GestorJuego(this);
-        juego = new GestorJuegoContador(juegoPrincipal);
+        juego = new GestorJuegoContador(new GestorJuego(this));
         tablero.agregarObservador(juego);
         
 
@@ -63,9 +62,19 @@ public class GestorAcciones implements ActionListener {
             
             String mensaje = juego.comprobarGanador(fila, columna, actual);
             
+            // Si gano alguien
             if (mensaje != null) {
-                JOptionPane.showMessageDialog(vista, mensaje);
-                System.exit(0);
+                String[] options = {"Continuar", "Salir"};
+                int opcion = JOptionPane.showOptionDialog(vista, mensaje, "Ganador",0, 1, null, options, options[0]);
+                
+                // Seleccion salir o cierra ventana
+                if(opcion == 1 || opcion == -1){
+                    System.exit(0);
+                }
+                
+                tablero.vaciar();
+                juego.setContadorTurnos(0);
+                
             }
 
         }

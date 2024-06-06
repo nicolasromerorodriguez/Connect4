@@ -60,4 +60,8 @@ public class GestorJuegoContador extends DecoradorGestorJuego {
         contadorTurnos -= 2;
     }
 
+    public void setContadorTurnos(int contadorTurnos) {
+        this.contadorTurnos = contadorTurnos;
+    }
+    
 }
