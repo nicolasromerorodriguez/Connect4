@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Tablero;
+package Decorador;
 
 import Fichas.Ficha;
 import Observador.IObservador;
@@ -14,9 +14,14 @@ import javax.swing.JLabel;
  *
  * @author cesar
  */
-public class GestorJuego implements IObservador {
+import Tablero.GestorAcciones;
+import Tablero.Tablero;
+
+public class GestorJuego implements IGestorJuego {
     
     //Maneja el orden de los turnos, define ganador
+    
+    //Tambien funciona como el componente concreto del decorador
 
     private int turnoActual;
     private GestorAcciones acciones;
@@ -37,6 +42,7 @@ public class GestorJuego implements IObservador {
         cambiarTurnoUI(acciones.getVista().labTurno);
     }
 
+    @Override
     public void cambiarTurnoUI(JLabel label) {
         switch (turnoActual) {
             case Tablero.AMARILLA -> {
@@ -51,6 +57,7 @@ public class GestorJuego implements IObservador {
     }
 
     //Metodo para cambiar de turno
+    @Override
     public void cambiarTurno() {
         switch (turnoActual) {
             case Tablero.AMARILLA -> {
@@ -63,7 +70,8 @@ public class GestorJuego implements IObservador {
     }
 
     //Metodo para comprobar el ganador
-    public boolean comprobarGanador(int fila, int columna, int tipo) {
+    @Override
+    public String comprobarGanador(int fila, int columna, int tipo) {
 
         int[][] direcciones = {
             {-1, 0}, // Abajo
@@ -84,7 +92,7 @@ public class GestorJuego implements IObservador {
             totalLinea += comprobarDireccion(fila, columna, tipo, factorFila, factorColumna);
             
             if (totalLinea >= 4) {
-                return true;
+                return "Ganaron las " + (tipo == Tablero.AMARILLA ? "amarillas" : "rojas");
             }
             
             // Se reinicia cuando cambia de direccion principal
@@ -94,9 +102,10 @@ public class GestorJuego implements IObservador {
             }
         }
 
-        return false;
+        return null;
     }
 
+    
     private int comprobarDireccion(int fila, int columna, int tipo, int factorFila, int factorColumna) {
         int fichasEnFila = 0;
         Ficha[][] fichas = acciones.getTablero().getFichas();

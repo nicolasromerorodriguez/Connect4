@@ -4,7 +4,11 @@
  */
 package Tablero;
 
+import Decorador.GestorJuego;
 import Comandos.ComandoPonerFicha;
+import Decorador.DecoradorGestorJuego;
+import Decorador.GestorJuegoContador;
+import Decorador.IGestorJuego;
 import Fabricas.FactoryAmarillas;
 import Fabricas.FactoryRojas;
 import Observador.IObservado;
@@ -23,18 +27,17 @@ public class GestorAcciones implements ActionListener {
 
     private VentanaJuego vista;
     private Tablero tablero;
-    private GestorJuego juego;
+    private GestorJuegoContador juego;
+    
 
     public GestorAcciones() {
 
         vista = new VentanaJuego(this);
         tablero = Tablero.getInstance();
         tablero.agregarObservador(vista);
-
-        juego = new GestorJuego(this);
+        juego = new GestorJuegoContador(new GestorJuego(this));
         tablero.agregarObservador(juego);
-
-        tablero.notificarObservadores();
+        
 
         arrancarBotones();
     }
@@ -57,15 +60,27 @@ public class GestorAcciones implements ActionListener {
                 return;
             }
             
-            if (juego.comprobarGanador(fila, columna, actual)) {
-                String color = actual == Tablero.AMARILLA ? "amarillas" : "rojas"; // Asigna color a mostrar
-                JOptionPane.showMessageDialog(vista, "Ganaron las " + color);
-                System.exit(0);
+            String mensaje = juego.comprobarGanador(fila, columna, actual);
+            
+            // Si gano alguien
+            if (mensaje != null) {
+                String[] options = {"Continuar", "Salir"};
+                int opcion = JOptionPane.showOptionDialog(vista, mensaje, "Ganador",0, 1, null, options, options[0]);
+                
+                // Seleccion salir o cierra ventana
+                if(opcion == 1 || opcion == -1){
+                    System.exit(0);
+                }
+                
+                tablero.vaciar();
+                juego.setContadorTurnos(0);
+                
             }
 
         }
         if (e.getActionCommand().equals("restaurar")) {
             tablero.restaurarMovimiento();
+            juego.correctorTurnos();
         }
     }
 
