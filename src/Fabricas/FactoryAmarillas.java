@@ -13,9 +13,9 @@ import Fichas.FichaAmarilla;
  */
 public class FactoryAmarillas extends FactoryFichas {
     
-    //Creador concreto de Fichas amarillas
+    // Creador concreto de Fichas amarillas
     
-    //Metodo heredado de Factory fichas para crear fichas amarillas
+    // Metodo heredado de Factory fichas para crear fichas amarillas
     @Override
     public Ficha crearFicha(int fila, int columna) {
         return new FichaAmarilla(fila, columna);

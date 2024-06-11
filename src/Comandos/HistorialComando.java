@@ -12,7 +12,7 @@ import java.util.Stack;
 
 public class HistorialComando {
     
-    //Permite guardar las jugadas
+    // Permite guardar las jugadas
     private Stack<Comando> history = new Stack<>();
 
     public void push(Comando c) {

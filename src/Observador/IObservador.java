@@ -10,6 +10,6 @@ package Observador;
  */
 public interface IObservador {
     
-    //Define metodos para el observador, aplicando el patron observer
+    // Define metodos para el observador, aplicando el patron observer
     public void actualizar();
 }

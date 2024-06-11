@@ -11,7 +11,7 @@ import javax.swing.JLabel;
  * @author nicol
  */
 
- //Funciona como el decorador del patron decorator
+ // Funciona como el decorador del patron decorator
 public abstract class DecoradorGestorJuego implements IGestorJuego {
     protected IGestorJuego gestorJuego;
 

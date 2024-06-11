@@ -11,7 +11,7 @@ package Decorador;
 
 import Observador.*;
 import javax.swing.*;
-//Clase que representa el componente del patron decorator
+// Clase que representa el componente del patron decorator
 public interface IGestorJuego extends IObservador{
     
     

@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  */
 public class FichaRoja extends Ficha {
     
-     //Producto concreto de las fichas
+     // Producto concreto de las fichas
     
     private static final String rutaTextura = "/imagenes/roja.png"; //Aplica la textura para la ficha
 

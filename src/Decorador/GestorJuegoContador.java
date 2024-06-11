@@ -10,7 +10,7 @@ import javax.swing.JLabel;
  *
  * @author nicol
  */
-//Funciona como el decrador concreto del patron decorator
+// Funciona como el decrador concreto del patron decorator
 public class GestorJuegoContador extends DecoradorGestorJuego {
 
     private int contadorTurnos;

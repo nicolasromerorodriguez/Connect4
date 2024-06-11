@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
  */
 public class TipoFicha {
     
-    //Define atributos de los tipos de fichas
+    // Define atributos de los tipos de fichas
 
     private String nombre;
     private ImageIcon textura;

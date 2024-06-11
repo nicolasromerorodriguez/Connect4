@@ -19,9 +19,9 @@ import Tablero.Tablero;
 
 public class GestorJuego implements IGestorJuego {
     
-    //Maneja el orden de los turnos, define ganador
+    // Maneja el orden de los turnos, define ganador
     
-    //Tambien funciona como el componente concreto del decorador
+    // Tambien funciona como el componente concreto del decorador
 
     private int turnoActual;
     private GestorAcciones acciones;
@@ -56,7 +56,7 @@ public class GestorJuego implements IGestorJuego {
         }
     }
 
-    //Metodo para cambiar de turno
+    // Metodo para cambiar de turno
     @Override
     public void cambiarTurno() {
         switch (turnoActual) {
@@ -69,7 +69,7 @@ public class GestorJuego implements IGestorJuego {
         }
     }
 
-    //Metodo para comprobar el ganador
+    // Metodo para comprobar el ganador
     @Override
     public String comprobarGanador(int fila, int columna, int tipo) {
 

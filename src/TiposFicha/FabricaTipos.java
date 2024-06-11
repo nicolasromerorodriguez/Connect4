@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  */
 public class FabricaTipos {
     
-    //Aplica el patron flyweigt para guardar los tipos de ficha
+    // Aplica el patron flyweight para guardar los tipos de ficha
     private static ArrayList<TipoFicha>  tipoFichas = new ArrayList<>();
     
     public static TipoFicha getTipoFicha(String nombre, ImageIcon icon){

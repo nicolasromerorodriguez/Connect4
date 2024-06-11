@@ -14,9 +14,9 @@ import Fichas.FichaRoja;
 public class FactoryRojas extends FactoryFichas {
 
     
-    //Creador concreto de Fichas rojas
+    // Creador concreto de Fichas rojas
     
-    //Metodo heredado de Factory fichas para crear fichas rojas
+    // Metodo heredado de Factory fichas para crear fichas rojas
     @Override
     public Ficha crearFicha(int fila, int columna) {
         return new FichaRoja(fila, columna);

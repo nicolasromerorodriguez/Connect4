@@ -11,10 +11,10 @@ import TiposFicha.TipoFicha;
  */
 public abstract class Ficha{
     
-    //Producto abstracto de las fichas
+    // Producto abstracto de las fichas
     
     
-    //Define los atributos de las fichas 
+    // Define los atributos de las fichas 
     protected int fila;
     protected int columna;
     protected TipoFicha tipo; //Aplica el tipo de ficha

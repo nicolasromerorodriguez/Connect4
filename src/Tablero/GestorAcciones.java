@@ -42,7 +42,7 @@ public class GestorAcciones implements ActionListener {
         arrancarBotones();
     }
 
-    //Acciones de los botones
+    // Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().startsWith("poner")) {
